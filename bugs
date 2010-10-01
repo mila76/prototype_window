@@ -1,0 +1,9 @@
+Current Bug:
+
+* passing element and no top, left to the window constructor, not get top/left position from the element
+
+* reposition of the element passed to window
+
+* autoexpand option have some bugs left
+
+* on window resize/scroll something is wrong

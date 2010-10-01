@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it">
+<head>
+<script type="text/javascript" language="JavaScript" src="../javascripts/prototype.js"></script>
+<script type="text/javascript" language="JavaScript" src="../javascripts/effects.js"></script>
+<script type="text/javascript" language="JavaScript" src="../javascripts/window.js"></script>
+<script type="text/javascript" language="JavaScript" src="../javascripts/window_ext.js"></script>
+<script type="text/javascript" language="JavaScript" src="../javascripts/window_effects.js"></script>
+<script type="text/javascript" language="JavaScript" src="../javascripts/tooltip.js"></script>
+<link rel="stylesheet" type="text/css" href="../javascripts/themes/lighting.css" />
+<link rel="stylesheet" type="text/css" href="../javascripts/themes/osx.css" />
+<link rel="stylesheet" type="text/css" href="../javascripts/themes/smoothness.css">
+<title>PWC Ajax Tests</title>
+<style>
+h4 {
+	margin:0.6em 0;
+}
+</style>
+</head>
+<body>
+<h4>Ajax Window (<a href="javascript:;" onclick="new Window({width:540, height:400, zIndex: 100, resizable: true, title: 'Sample window', draggable:true}).setCentered().setAjaxContent('dialog_ajax.html', {method: 'get'});">click here</a>)</h4>
+
+<h4>Url Window (<a href="javascript:;" onclick="new Window({width:540, height:400, zIndex: 100, resizable: true, title: 'Sample window', draggable:true, url: 'http://www.rubyonrails.org/'}).show();">click here</a>)</h4>
+
+<h4>Ajax Dialog (<a href="javascript:;" onclick="Dialog.alert({url: 'dialog_ajax.html', options: {method: 'get'}}, {className: 'osx', height:400, title: 'Welcome to Prototype Window Class (PWC)', okLabel: 'Close'}); WindowCloseKey.init();">click here</a>)</h4>
+
+<h4>Ajax Dialog Effects (<a href="javascript:;" onclick="Dialog.alert({haveShadow: false, url: 'dialog_ajax.html', options: {method: 'get'}}, {className: 'lighting', useEffects: true, width:540, effectDuration: 0.8, title: 'Welcome to Prototype Window Class (PWC)', resizable: true, draggable: true, okLabel: 'Close'});">click here</a>)</h4>
+
+<h4>Url Window Effects (<a href="javascript:;" onclick="new Window({id: 'dialog2', haveShadow: false, title: 'Ruby on Rails', bottom:20, right:15, width:300, height:200, resizable: false, useEffects: true, url: 'http://www.rubyonrails.com/', showEffectOptions: {duration:3}}).setDestroyOnClose().show();">click here</a>)</h4>
+
+<p style="padding:10px;">
+<a href="javascript:;" onclick="var win = Windows.focusedWindow; win.setAjaxContent('dialog_ajax.html', {method: 'get'});">setAjax</a>
+<a href="javascript:;" onclick="var win = Windows.focusedWindow; win.setContent('<h1>Here we ARE!!!</h1>');">setContent HTML</a>
+<a href="javascript:;" onclick="var win = Windows.focusedWindow; win.setContent($('testelem').show());">setContent Element</a>
+<br>
+<a href="javascript:;" onclick="var win = Windows.focusedWindow; win.changeClassName('smoothness');">Change Class (Smoothness)</a>
+<a href="javascript:;" onclick="var win = Windows.focusedWindow; win.changeClassName('osx');">Change Class (OSX)</a>
+<br>
+<a href="javascript:;" onclick="var win = Windows.focusedWindow; win.setURL('http://www.google.it/');">setUrl</a> 
+<a href="javascript:;" onclick="var win = Windows.focusedWindow; alert(win.getURL());">Get Url</a>
+<a href="javascript:;" onclick="var win = Windows.focusedWindow; win.refreshURL();">refresh Url</a>
+</p>
+<h1 id="testelem" style="display:none;">This is an Element!!</h1>
+</body>
+</html>

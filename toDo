@@ -1,0 +1,25 @@
+To Do:
+
+* restore element on setContent (from an element to html for example) not only on close
+
+* Fix bug, fix bug, fix bug
+
+* update to 1.6/1.7 Events ?
+
+* use of Element#purge ?
+
+* update Windows containers
+
+* use of Element#Storage ?
+
+* Appear from the top
+
+* New samples (for testing multi window, effects, and other)
+
+* Some new themes (gray, black, a dialog with only the close)
+
+* scripty2
+
+* Dialog a class ?
+
+* Documentation (using pdoc? http://pdoc.org/)

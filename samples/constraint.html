@@ -1,41 +1,29 @@
+<!DOCTYPE html>
 <html>
-  <head>
-
-  <link href="../themes/default.css" rel="stylesheet" type="text/css"/>	
-  <link href="../themes/alphacube.css" rel="stylesheet" type="text/css"/>
-
-  <script type="text/javascript" src="../javascripts/prototype.js"> </script>
-  <script type="text/javascript" src="../javascripts/effects.js"> </script>
-  <script type="text/javascript" src="../javascripts/window.js"> </script>
-  <script type="text/javascript" src="../javascripts/window_effects.js"> </script>
-  <script type="text/javascript" src="../javascripts/debug.js"> </script>
-
-<script type="text/javascript"> 
+<head>
+<link href="../javascripts/themes/lighting.css" rel="stylesheet" type="text/css" >
+<script type="text/javascript" src="../javascripts/prototype.js"></script>
+<script type="text/javascript" src="../javascripts/effects.js"></script>
+<script type="text/javascript" src="../javascripts/window.js"></script>
+<script type="text/javascript" src="../javascripts/window_effects.js"> </script>
+<title>PWC Constraint Tests</title>
+<script type="text/javascript">
 function win1()
 {
-  var win = new Window({id: "win1", className: "alphacube", title: "Sample", width:250, height:150, top:0, left: 1, parent:$('container')}); 
-  win.getContent().innerHTML = "<h1>Constraint inside  a div !!</h1>constraint: {left:10, right:20}<br><a href='#' onclick='Windows.getWindow(\"win1\").maximize()'>Maximize me</a>"; 
-
-  win.setDestroyOnClose(); 
-  win.show();
-  win.setConstraint(true, {left:10, right:20})
+  var win = new Window({id: "win1", title: "Sample", width:250, height:150, top:0, left: 1, parent:$('container')}).setContent(
+    "<h1>Constraint inside  a div !!</h1>constraint: {left:10, right:20}<br><a href='#' onclick='Windows.getWindow(\"win1\").maximize()'>Maximize me</a>"
+  ).setConstraint(true, {left:10, right:20}).setDestroyOnClose().show();
   win.toFront();
-}
 
-function win2()
-{
-  var win = new Window({id: "win2", className: "alphacube", title: "Sample", width:200, height:150}); 
+  var win = new Window({id: "win2", title: "Sample", width:200, height:150}); 
   win.getContent().innerHTML = "<h1>Constraint inside page !!</h1>constraint: {top: 30, bottom:10}<br><a href='#' onclick='Windows.getWindow(\"win2\").maximize()'>Maximize me</a>"; 
-
   win.setDestroyOnClose(); 
-  win.showCenter();
+  win.setCentered();
+  win.show();
   win.setConstraint(true, {left:0, right:0, top: 30, bottom:10})
   win.toFront();
-}
 
-function win3()
-{
-  var win = new Window({id: "win3", className: "alphacube", title: "Sample", width:250, height:150, wiredDrag: true}); 
+  var win = new Window({id: "win3", title: "Sample", width:250, height:150, wiredDrag: true}); 
   win.getContent().innerHTML = "<h1>No Constraint</h1>Wired mode<br><a href='#' onclick='Windows.getWindow(\"win3\").maximize()'>Maximize me</a>"; 
   win.setDestroyOnClose(); 
   win.setLocation(10, 500);
@@ -43,14 +31,35 @@ function win3()
   win.toFront();
 }
 
+function win2()
+{
+  var win = new Window({id: "win4", title: "Sample", width:250, height:150, bottom:20, left:1, parent:$('container')}); 
+  win.getContent().innerHTML = "<h1>Constraint inside  a div !!</h1>constraint: {left:10, right:20}<br><a href='#' onclick='Windows.getWindow(\"win4\").maximize()'>Maximize me</a>"; 
+  win.setDestroyOnClose(); 
+  win.show();
+  win.setConstraint(true, {left:10, right:20})
+  win.toFront();
+
+  var win = new Window({id: "win5", title: "Sample", width:200, height:150, bottom:80, right:50}); 
+  win.getContent().innerHTML = "<h1>Constraint inside page !!</h1>constraint: {top: 30, bottom:10}<br><a href='#' onclick='Windows.getWindow(\"win5\").maximize()'>Maximize me</a>"; 
+  win.setDestroyOnClose(); 
+  win.setCentered();
+  win.show();
+  win.setConstraint(true, {left:0, right:0, top: 30, bottom:10})
+  win.toFront();
+
+  var win = new Window({id: "win6", title: "Sample", width:250, height:150, top:100, right:250, wiredDrag: true}); 
+  win.getContent().innerHTML = "<h1>No Constraint</h1>Wired mode<br><a href='#' onclick='Windows.getWindow(\"win6\").maximize()'>Maximize me</a>"; 
+  win.setDestroyOnClose(); 
+  win.show();
+  win.toFront();
+}
+
 </script>
 <style>
-body {
-  background: #363636;
-}
 #border {
   position:absolute;
-  top:10px;
+  top:90px;
   left:10px;
   width:500px;
   height:500px;
@@ -66,18 +75,24 @@ body {
   overflow:hidden;
   background:#DAEE9B;
   z-index:0;
-}  
+}
+#bigStuff {
+  height:1500px;
+  width:1500px;
+}
+
+h4 {
+	margin:0.6em 0;
+}
+
 </style>
 </head>
 <body>
-
+<h4>3 Windows (<a href="javascript:;" onclick="win1();">click here</a>)</h4>
+<h4>3 Windows with Bottom/Right (<a href="javascript:;" onclick="win2();">click here</a>)</h4>
 <div id="border">
   <div id="container"></div>
 </div>
-
-<script>
-  win1();
-  win2();
-  win3();
-</script>
-</body></html>
+<div id="bigStuff"></div>
+</body>
+</html>

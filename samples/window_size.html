@@ -1,0 +1,67 @@
+<!DOCTYpE html pUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it">
+<head>
+<script type="text/javascript" language="JavaScript" src="../javascripts/prototype.js"></script>
+<script type="text/javascript" language="JavaScript" src="../javascripts/effects.js"></script>
+<script type="text/javascript" language="JavaScript" src="../javascripts/window.js"></script>
+<script type="text/javascript" language="JavaScript" src="../javascripts/window_ext.js"></script>
+<script type="text/javascript" language="JavaScript" src="../javascripts/window_effects.js"></script>
+<link rel="stylesheet" type="text/css" href="../javascripts/themes/lighting.css" />
+<title>PWC Window Size Tests</title>
+<style>
+h4 {
+	margin:0.6em 0;
+}
+</style>
+</head>
+<body>
+<h4>Window Width and Height (<a href="javascript:;" onclick="new Window({id: 'test', width:400, height:300, title: 'Window Width and Height'}).setContent($('HTMLdata').innerHTML).show();">click here</a>)</h4>
+<h4>Window Width and Height (Effects) (<a href="javascript:;" onclick="new Window({useEffects: true, width:400, height:300, title: 'Window Width and Height'}).setContent($('HTMLdata').innerHTML).show();">click here</a>)</h4>
+<h4>Window Width and Height (AutoExpand) (<a href="javascript:;" onclick="new Window({autoExpandable: true, width:400, height:300, title: 'Window Width and Height'}).setContent($('HTMLdata').innerHTML).show();">click here</a>)</h4>
+<h4>Window Width and Height (Effects & AutoExpand) (<a href="javascript:;" onclick="new Window({useEffects: true, autoExpandable: true, width:400, height:300, title: 'Window Width and Height'}).setContent($('HTMLdata').innerHTML).show();">click here</a>)</h4>
+
+<h4>Window Width (<a href="javascript:;" onclick="new Window({width:400, title: 'Window Width'}).setContent($('HTMLdata').innerHTML).show();">click here</a>)</h4>
+<h4>Window Width (Effects) (<a href="javascript:;" onclick="new Window({useEffects: true, width:400, title: 'Window Width'}).setContent($('HTMLdata').innerHTML).show();">click here</a>)</h4>
+<h4>Window Width (AutoExpand) (<a href="javascript:;" onclick="new Window({autoExpandable: true, width:400, title: 'Window Width'}).setContent($('HTMLdata').innerHTML).show();">click here</a>)</h4>
+<h4>Window Width (Effects & AutoExpand) (<a href="javascript:;" onclick="new Window({useEffects: true, autoExpandable: true, width:400, title: 'Window Width'}).setContent($('HTMLdata').innerHTML).show();">click here</a>)</h4>
+
+<h4>Window Height (<a href="javascript:;" onclick="new Window({height:200, title: 'Window Height'}).setContent($('HTMLdata').innerHTML).show();">click here</a>)</h4>
+<h4>Window Height (Effects) (<a href="javascript:;" onclick="new Window({useEffects: true, height:200, title: 'Window Height'}).setContent($('HTMLdata').innerHTML).show();">click here</a>)</h4>
+<h4>Window Height (AutoExpand) (<a href="javascript:;" onclick="new Window({autoExpandable: true, height:200, title: 'Window Height'}).setContent($('HTMLdata').innerHTML).show();">click here</a>)</h4>
+<h4>Window Height (Effects & AutoExpand) (<a href="javascript:;" onclick="new Window({useEffects: true, autoExpandable: true, height:200, title: 'Window Height'}).setContent($('HTMLdata').innerHTML).show();">click here</a>)</h4>
+
+<h4>Window None (<a href="javascript:;" onclick="new Window({title: 'Window None'}).setContent($('HTMLdata').innerHTML).show();">click here</a>)</h4>
+<h4>Window None (AutoExpand) (<a href="javascript:;" onclick="new Window({autoExpandable: true, title: 'Window None'}).setContent($('HTMLdata').innerHTML).show();">click here</a>)</h4>
+<h4>Window None (Effects & AutoExpand) (<a href="javascript:;" onclick="new Window({useEffects: true, autoExpandable: true, title: 'Window None'}).setContent($('HTMLdata').innerHTML).show();">click here</a>)</h4>
+<h4>Window None (Effects) (<a href="javascript:;" onclick="new Window({useEffects: true, title: 'Window None'}).setContent($('HTMLdata').innerHTML).show();">click here</a>)</h4>
+
+<h4>Dialog Width (AutoExpand) (<a href="javascript:;" onclick="Dialog.confirm($('HTMLdata').innerHTML, {width:400, autoExpandable:true, title: 'Window Width'});">click here</a>)</h4>
+<p style="padding:10px;">
+<br>
+</p>
+
+<div id="HTMLdata" style="display:none;">
+	<div style="padding:2px; text-align:center">
+	<span class="intro_message">
+	  Windows and Dialogs have never been so easy.<br>
+	  New version 1.2.1 <br><br>
+	</span>
+	<a href="javascript:;" onclick="this.next().toggle();">changeLog</a>
+	<div id="changelog" style="text-align:left; margin:10px; display:none;">
+	<ul class="intro_message">
+	  <li> <em>Added:</em> gridX and gridY constructor's options to snap move and resize </li>
+	  <li> <em>Added:</em> Effect on modal overlay (fade/appear) only if effects.js in included.<br/> 
+	    You can change effect options (Windows.overlayShowEffectOptions and Windows.overlayHideEffectOptions).</li>
+	  <li> <em>Fixed:</em>  Multimodal mode.</li>
+	  <li> <em>Fixed:</em>  Works on WebKit.</li>
+	  <li> <em>Beta:</em> effects on minimize and maximize. You need to include window_effects.js to have them. <br/>
+	       Check out samples/constraint.html from the distrib (also on samples page).
+	  </li>
+	</ul>
+	<br style="clear:both"/>
+	</div>
+	<h4 class="intro_message">If it's not your first visit, and if you have any troubles with samples, clear your cache.</h4>
+	</div>
+</div>
+</body>
+</html>

@@ -3,7 +3,7 @@
 //
 // Object to store hide/show windows status in a cookie
 // Just add at the end of your HTML file this javascript line: WindowStore.init()
-WindowStore = {
+var WindowStore = {
   doSetCookie: false,
   cookieName:  "__window_store__",
   expired:     null,
@@ -84,32 +84,11 @@ WindowStore = {
     }
     doSetCookie = true;
   }
-}
+};
 
 // Object to set a close key an all windows
-WindowCloseKey = {
-  keyCode: Event.KEY_ESC,
-  
+var WindowCloseKey = {
   init: function(keyCode) {
-    if (keyCode)
-      WindowCloseKey.keyCode = keyCode;      
-      
-    Event.observe(document, 'keydown', this._closeCurrentWindow.bindAsEventListener(this));   
-  },
-  
-  _closeCurrentWindow: function(event) {
-    var e = event || window.event 
-  	var characterCode = e.which || e.keyCode;
-  	
-  	// Check if there is a top window (it means it's an URL content)
-  	var win = top.Windows.focusedWindow;
-    if (characterCode == WindowCloseKey.keyCode && win && win.options.closable) {
-      if (win.cancelCallback) 
-        top.Dialog.cancelCallback();      
-      else if (win.okCallback) 
-        top.Dialog.okCallback();
-      else
-        top.Windows.close(top.Windows.focusedWindow.getId());
-    }
+    Windows.setAllWinCloseOnKey(keyCode);
   }
-}
+};

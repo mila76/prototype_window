@@ -1,51 +1,83 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" version="-//W3C//DTD XHTML 1.1//EN" xml:lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-	<script type="text/javascript" src="../javascripts/prototype.js"> </script>
-	<script type="text/javascript" src="../javascripts/effects.js"> </script>
-	<script type="text/javascript" src="../javascripts/window.js"> </script>
-	<script type="text/javascript" src="../javascripts/debug.js"> </script>
-	<link href="../themes/default.css" rel="stylesheet" type="text/css"/>
-	<link href="../themes/alert.css" rel="stylesheet" type="text/css"/>
-	<link href="../themes/alphacube.css" rel="stylesheet" type="text/css"/>
-
-	<title>dialog</title>
-	
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type="text/javascript" language="JavaScript" src="../javascripts/prototype.js"></script>
+<script type="text/javascript" language="JavaScript" src="../javascripts/effects.js"></script>
+<script type="text/javascript" language="JavaScript" src="../javascripts/window.js"></script>
+<link rel="stylesheet" type="text/css" href="../javascripts/themes/lighting.css">
+<link rel="stylesheet" type="text/css" href="../javascripts/themes/smoothness.css">
+<title>PWC Dialog Tests</title>
+<style>
+h4 {
+	margin:0.6em 0;
+}
+</style>
 </head>
-
 <body>
-<a href="#" onclick="Dialog.alert()">empty alert dialog</a>
-<br/>
-<a href="#" onclick="Dialog.confirm()">empty confirm dialog</a>
-<br/>
-<a href="#" onclick="Dialog.info()">empty info dialog</a> (does not make sense because you will have to reload the page)
-<br/>
-<br/>
-<br/>
-<br/>
-<a href="#" onclick="openAlert()">open alert dialog</a><br/>
-<a href="#" onclick="openConfirm()">open confirm dialog</a><br/>
-<a href="#" onclick="openAjaxConfirm()">open confirm dialog, dialog content is filled by an ajax call</a><br/>
+<h4>Empty Alert Dialog (<a href="javascript:;" onclick="Dialog.alert();">click here</a>)</h4>
+<h4>Open Alert Dialog (<a href="javascript:;" onclick="openAjaxAlert();">click here</a>)</h4>
+<h4>Open Alert Dialog (filled by an AJAX) (<a href="javascript:;" onclick="openAlert();">click here</a>)</h4>
 
+<h4>Empty Confirm Dialog (<a href="javascript:;" onclick="Dialog.confirm();">click here</a>)</h4>
+<h4>Open Confirm Dialog (Height) (<a href="javascript:;" onclick="openConfirm();">click here</a>)</h4>
+<h4>Open Confirm Dialog (CloseOnKey) (<a href="javascript:;" onclick="openConfirmCloseKey();">click here</a>)</h4>
+<h4>Open Confirm Dialog (filled by an AJAX) (<a href="javascript:;" onclick="openAjaxConfirm();">click here</a>)</h4>
+<h4>Open Confirm Dialog (Return False) (Closable only with Cancel) (<a href="javascript:;" onclick="openConfirmFalse();">click here</a>)</h4>
+
+<h4>Empty Info Dialog <span style="font-size:10px;">(does not make sense because you will have to reload the page)</span> (<a href="javascript:;" onclick="Dialog.info();">click here</a>)</h4>
+<h4>Open Info Dialog (filled by an AJAX) <span style="font-size:10px;">(does not make sense because you will have to reload the page)</span> (<a href="javascript:;" onclick="openAjaxInfo();">click here</a>)</h4>
+<h4>Open Info Dialog (with a Countdown) (<a href="javascript:;" onclick="openInfo();">click here</a>)</h4>
 
 <script type="text/javascript">
-  function openAlert() {
-   Dialog.alert("Add your <b>HTML</b> message here", {windowParameters: {className: "alphacube"}})
-  }
-  
-  function openConfirm() {
-    Dialog.confirm("Add your <b>HTML</b> message here<br/>Better than a classic javascript alert?", 
-                   {top: 10, width:250, className: "alphacube", okLabel: "Yes", cancelLabel:"No"})
-  }
-  
-  function openAjaxConfirm() {
-      Dialog.confirm({url: "dialog_ajax.html", options: {method: 'get'}}, 
-                     {top: 10, width:250, className: "alphacube", okLabel: "Yes", cancelLabel:"No"})    
-  }
-</script>
+function openAlert() {
+  Dialog.alert('Add your <b>HTML</b> message here')
+}
+function openAjaxConfirm() {
+  Dialog.confirm({url: 'dialog_ajax.html', options: {method: 'get'}}, 
+                 {left: 10, width:450, okLabel: 'Yes', cancelLabel:'No', 
+                  onOk:function(win) {console.debug('OK callBack'); return true;}, onCancel:function(win) {console.debug('Cancel callBack');}})
+}
+function openAjaxAlert() {
+  Dialog.alert({url: 'dialog_ajax.html', options: {method: 'get'}}, 
+               {className: 'smoothness', left: 80, width:550, okLabel: 'Yes', cancelLabel:'No'})    
+}
 
+function openConfirm() {
+  Dialog.confirm('Add your <b>HTML</b> message here<br>Better than a classic javascript Confirm?', 
+                 {top: 10, height:250, okLabel: 'Yes', cancelLabel:'No', 
+                 onOk:function(win) {console.debug('OK callBack'); return true;}, onCancel:function(win) {console.debug('Cancel callBack');}})
+}
+function openConfirmCloseKey() {
+  Dialog.confirm('Add your <b>HTML</b> message here<br>Better than a classic javascript Confirm?', 
+                 {top: 10, width:250, okLabel: 'Yes', cancelLabel:'No', closeOnKey: true, 
+                 onShow: function() {console.debug('Show');}, onOk:function(win) {console.debug('OK callBack: ' + win.id); return true;}, onCancel:function(win) {console.debug('Cancel callBack');}})
+}
+function openConfirmFalse() {
+  Dialog.confirm('Add your <b>HTML</b> message here<br>Unclosable dialog', 
+                 {top: 10, height:250, okLabel: 'Yes', cancelLabel:'No', 
+                 onOk:function(win) {console.debug('OK callBack'); return false;}, onCancel:function(win) {console.debug('Cancel callBack');}})
+}
+
+function openAjaxInfo() {
+  Dialog.info({url: 'dialog_ajax.html', options: {method: 'get'}}, 
+              {top: 10, width:350})    
+}
+
+var timeout;
+function openInfo() { 
+  Dialog.info('Test of info panel, it will close <br>in 10s ...', 
+              {width:250, height:100, showProgress: true});
+  timeout = 10;
+  setTimeout(infoTimeout, 1000);
+} 
+function infoTimeout() {
+  timeout--;
+  if (timeout >0) {
+    Dialog.setMessage('Test of info panel, it will close <br>in ' + timeout + 's ...');
+    setTimeout(infoTimeout, 1000);
+  } else Dialog.close();
+}
+</script>
 </body>
 </html>

@@ -1,0 +1,149 @@
+.lighting {
+  background:#FFF none repeat scroll 0 0;
+  border:1px solid #3B5A82;
+  border-radius:6px;
+  padding:1px;
+  -moz-border-radius:6px;
+}
+
+.lighting .content {
+  background:#BFDBFF none repeat scroll 0 0;
+  color:#000;
+  font:normal 12px Verdana, Arial, sans-serif;
+  padding:4px;
+  overflow:auto;
+}
+
+.lighting .title {
+  background:#D7EBF9 url('lighting/ui-bg_glass_80_d7ebf9_1x400.png') repeat-x scroll 50% 50%;
+  border-radius:6px 6px 0 0;
+  color:#17385B;
+  font:bold 14px/20px Verdana, Arial, sans-serif;
+  height:22px;
+  margin:0;
+  padding:0;
+  text-align:center;
+  -moz-border-radius:6px 6px 0 0;
+}
+
+.lighting .sizer {
+  background:transparent url('lighting/sizer.png') no-repeat scroll right 0;
+  bottom:1px;
+  cursor:se-resize;
+  font-size:0.1px;
+  height:12px;
+  position:absolute;
+  right:1px;
+  width:12px;
+}
+
+.lighting .statusbar {
+  background-color:#BFDBFF;
+  border-radius:0 0 6px 6px;
+  font-size:8px;
+  height:12px;
+  -moz-border-radius:0 0 6px 6px;
+}
+
+.lighting .close {
+  background:transparent url('lighting/buttons.png') no-repeat scroll 0 0;
+  height:20px;
+  outline:none;
+  position:absolute;
+  right:6px;
+  top:1px;
+  width:21px;
+  z-index:1000;
+}
+.lighting .close:hover {
+  background:transparent url('lighting/buttons.png') no-repeat scroll 0 -20px;
+}
+
+.lighting .maximize {
+  background:transparent url('lighting/buttons.png') no-repeat scroll 0 -40px;
+  height:20px;
+  outline:none;
+  position:absolute;
+  right:27px;
+  top:1px;
+  width:21px;
+  z-index:1000;
+}
+.lighting .maximize:hover {
+  background:transparent url('lighting/buttons.png') no-repeat scroll 0 -60px;
+}
+
+.lighting .minimize {
+  background:transparent url('lighting/buttons.png') no-repeat scroll 0 -80px;
+  height:20px;
+  outline:none;
+  position:absolute;
+  right:48px;
+  top:1px;
+  width:21px;
+  z-index:1000;
+}
+.lighting .minimize:hover {
+  background:transparent url('lighting/buttons.png') no-repeat scroll 0 -100px;
+}
+
+.lighting .buttonpanel {
+	background:#BFDBFF none repeat scroll 0 0;
+	padding-top:5px;
+	text-align:center;
+}
+.lighting .buttonpanel input {
+  background:#E6E6E6 url('lighting/ui-bg_glass_75_e6e6e6_1x400.png') repeat-x scroll 50% 50%;
+  border:1px solid #D3D3D3;
+  border-radius:4px;
+  color:#555;
+  font-size:10px;
+  font-weight:normal;
+  margin-right:0.1em;
+  overflow:visible;
+  padding:0.3em 1em;
+  text-align:center;
+  -moz-border-radius:4px;
+}
+.lighting .buttonpanel input:hover, .lighting .buttonpanel input:focus { 
+  border:1px solid #999;
+  background:#DADADA url('lighting/ui-bg_glass_75_dadada_1x400.png') repeat-x scroll 50% 50%;
+  color:#212121;
+  outline:0;
+}
+.lighting .buttonpanel input:active {
+  border:1px solid #AAA;
+  background:#FFF url('lighting/ui-bg_glass_65_ffffff_1x400.png') repeat-x scroll 50% 50%;
+  color:#212121;
+}
+
+.lighting iframe {
+  border:0;
+  height:100%;
+  margin:0;
+  overflow:auto;
+  padding:0;
+  width:100%;
+}
+
+.lighting .draggable {
+  cursor:move;
+}
+
+.pwc_shadow {
+  box-shadow:3px 3px 10px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow:3px 3px 10px rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow:3px 3px 10px rgba(0, 0, 0, 0.4);
+}
+
+.pwc_overlay {
+  background-color:#D1D1D1;
+  height:0;
+  left:0;
+  opacity:0.6;
+  position:absolute;
+  top:0;
+  width:100%;
+  -moz-opacity:0.6;
+  filter:alpha(opacity=60);
+}

@@ -3,7 +3,7 @@ Object.extend(Object.extend(Effect.ResizeWindow.prototype, Effect.Base.prototype
   initialize: function(win, top, left, width, height) {
     this.window = win;
     this.window.resizing = true;
-    
+
     var size = win.getSize();
     this.initWidth    = parseFloat(size.width);
     this.initHeight   = parseFloat(size.height);
@@ -21,13 +21,12 @@ Object.extend(Object.extend(Effect.ResizeWindow.prototype, Effect.Base.prototype
     this.dy     = this.top    - this.initTop;
     this.dw     = this.width  - this.initWidth;
     this.dh     = this.height - this.initHeight;
-    
-    this.r2      = $(this.window.getId() + "_row2");
-    this.content = $(this.window.getId() + "_content");
-        
-    this.contentOverflow = this.content.getStyle("overflow") || "auto";
-    this.content.setStyle({overflow: "hidden"});
-    
+
+    this.content = $(this.window.getContent());
+
+    this.contentOverflow = this.content.getStyle('overflow') || 'auto';
+    this.content.setStyle({overflow: 'hidden'});
+
     // Wired mode
     if (this.window.options.wiredDrag) {
       this.window.currentDrag = win._createWiredElement();
@@ -35,26 +34,21 @@ Object.extend(Object.extend(Effect.ResizeWindow.prototype, Effect.Base.prototype
       this.window.element.hide();
     }
 
+//    if (this.window.shadow) this.window.shadow.hide();
+
     this.start(arguments[5]);
   },
-  
+
   update: function(position) {
     var width  = Math.floor(this.initWidth  + this.dw * position);
     var height = Math.floor(this.initHeight + this.dh * position);
     var top    = Math.floor(this.initTop    + this.dy * position);
     var left   = Math.floor(this.initLeft   + this.dx * position);
 
-    if (window.ie) {
-      if (Math.floor(height) == 0)  
-        this.r2.hide();
-      else if (Math.floor(height) >1)  
-        this.r2.show();
-    }      
-    this.r2.setStyle({height: height});
-    this.window.setSize(width, height);
+    this.window._resize(width, height);
     this.window.setLocation(top, left);
   },
-  
+
   finish: function(position) {
     // Wired mode
     if (this.window.options.wiredDrag) {
@@ -64,7 +58,6 @@ Object.extend(Object.extend(Effect.ResizeWindow.prototype, Effect.Base.prototype
 
     this.window.setSize(this.width, this.height);
     this.window.setLocation(this.top, this.left);
-    this.r2.setStyle({height: null});
     
     this.content.setStyle({overflow: this.contentOverflow});
       
@@ -73,87 +66,97 @@ Object.extend(Object.extend(Effect.ResizeWindow.prototype, Effect.Base.prototype
 });
 
 Effect.ModalSlideDown = function(element) {
-  var windowScroll = WindowUtilities.getWindowScroll();    
-  var height = element.getStyle("height");  
-  element.setStyle({top: - (parseFloat(height) - windowScroll.top) + "px"});
-  
+  var height = element.getStyle('height');
+  element.setStyle({top: - (parseFloat(height) - Windows.getPageSize().pageTop) + 'px'});
+
   element.show();
   return new Effect.Move(element, Object.extend({ x: 0, y: parseFloat(height) }, arguments[1] || {}));
 };
 
-
 Effect.ModalSlideUp = function(element) {
-  var height = element.getStyle("height");
+  var height = element.getStyle('height');
   return new Effect.Move(element, Object.extend({ x: 0, y: -parseFloat(height) }, arguments[1] || {}));
 };
 
 PopupEffect = Class.create();
-PopupEffect.prototype = {    
+PopupEffect.prototype = {
   initialize: function(htmlElement) {
-    this.html = $(htmlElement);      
-    this.options = Object.extend({className: "popup_effect", duration: 0.4}, arguments[1] || {});
-    
+    this.html = $(htmlElement);
+    this.options = Object.extend({className: 'popup_effect', duration: 0.4}, arguments[1] || {});
+
   },
+
   show: function(element, options) { 
-    var position = Position.cumulativeOffset(this.html);      
+    var position = Element.cumulativeOffset(this.html);
     var size = this.html.getDimensions();
-    var bounds = element.win.getBounds();
-    this.window =  element.win;      
+
+    this.element = $(element);
+
     // Create a div
     if (!this.div) {
-      this.div = $(document.createElement("div"));
-      this.div.className = this.options.className;
-      this.div.style.height = size.height + "px";
-      this.div.style.width  = size.width  + "px";
-      this.div.style.top    = position[1] + "px";
-      this.div.style.left   = position[0] + "px";   
-      this.div.style.position = "absolute"
+      this.div = new Element('div', {className: this.options.className});
       document.body.appendChild(this.div);
-    }                                                   
+    }
+    this.div.setStyle({
+      height: size.height + 'px',
+      left: position[0] + 'px',
+      position: 'absolute',
+      top: position[1] + 'px',
+      width: size.width  + 'px'
+    });
     if (this.options.fromOpacity)
-      this.div.setStyle({opacity: this.options.fromOpacity})
-    this.div.show();          
-    var style = "top:" + bounds.top + ";left:" +bounds.left + ";width:" + bounds.width +";height:" + bounds.height;
+      this.div.setStyle({opacity: this.options.fromOpacity});
+
+    this.div.show();
+
+    var style = {
+      height: this.element.getStyle('height'),
+      left: this.element.getStyle('left'),
+      top: this.element.getStyle('top'),
+      width: this.element.getStyle('width')
+    };
     if (this.options.toOpacity)
-      style += ";opacity:" + this.options.toOpacity;
-    
-    new Effect.Morph(this.div ,{style: style, duration: this.options.duration, afterFinish: this._showWindow.bind(this)});    
+      style = Object.extend({opacity: this.options.toOpacity.toString()}, style);
+
+    new Effect.Morph(this.div ,{style: style, duration: this.options.duration, afterFinish: this._showWindow.bind(this)});
   },
 
   hide: function(element, options) {     
-    var position = Position.cumulativeOffset(this.html);      
+    var position = Element.cumulativeOffset(this.html);      
     var size = this.html.getDimensions();    
-    this.window.visible = true; 
-    var bounds = this.window.getBounds();
-    this.window.visible = false; 
 
-    this.window.element.hide();
+    this.div.setStyle({
+      height: this.element.getStyle('height'),
+      left: this.element.getStyle('left'),
+      top: this.element.getStyle('top'),
+      width: this.element.getStyle('width')
+    });
 
-    this.div.style.height = bounds.height;
-    this.div.style.width  = bounds.width;
-    this.div.style.top    = bounds.top;
-    this.div.style.left   = bounds.left;
-    
     if (this.options.toOpacity)
-      this.div.setStyle({opacity: this.options.toOpacity})
+      this.div.setStyle({opacity: this.options.toOpacity});
 
+    this.element.hide();
     this.div.show();                                 
-    var style = "top:" + position[1] + "px;left:" + position[0] + "px;width:" + size.width +"px;height:" + size.height + "px";
 
-    if (this.options.fromOpacity)
-      style += ";opacity:" + this.options.fromOpacity;              
-    new Effect.Morph(this.div ,{style: style, duration: this.options.duration, afterFinish: this._hideDiv.bind(this)});    
+    var style = {
+      height: size.height + 'px',
+      left: position[0] + 'px',
+      top: position[1] + 'px',
+      width: size.width + 'px'
+    };
+    if (this.options.toOpacity)
+      style = Object.extend({opacity: this.options.fromOpacity.toString()}, style);
+
+    new Effect.Morph(this.div ,{style: style, duration: this.options.duration, afterFinish: this._hideDiv.bind(this)});
   },
-  
+
   _showWindow: function() {
     this.div.hide();
-    this.window.element.show(); 
+    this.element.show();
   },
-  
+
   _hideDiv: function() {
-    this.div.hide();  
-    if (this.window.options.destroyOnClose)
-      this.window.destroy();
+    this.div.hide();
   }
 }
 
